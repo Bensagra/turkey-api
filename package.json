@@ -1,13 +1,10 @@
 {
   "name": "turkey-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=@babel/preset-env",
-    "dev":"nodemon --exec npm run babel-node src/index.js"
-
-
+    "dev": "nodemon --exec npm run babel-node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +21,14 @@
     "@babel/preset-env": "^7.24.6",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bensagra/turkey-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bensagra/turkey-api/issues"
+  },
+  "homepage": "https://github.com/Bensagra/turkey-api#readme",
+  "description": ""
 }
