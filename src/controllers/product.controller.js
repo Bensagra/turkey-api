@@ -22,10 +22,8 @@ const getFromCategory = async (req, res) => {
         
         const query = "SELECT * FROM `Product`, `SubCategory`, `Category` WHERE Product.product_subcategory_id = "+ product_subcategory_id + "  and SubCategory.subcategory_id = Category.category_id";
         const result = await connection.query(query, product_subcategory_id);
-        
-       
-        
         res.json(result);
+
     } catch (error) {
         res.status(500).send(error.message);
     }
