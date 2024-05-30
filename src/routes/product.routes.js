@@ -6,7 +6,7 @@ const router = Router();
 
 
 router.get("/",productControllers.getproduct);
-router.get("/category", productControllers.getFromCategory);
-router.get("/gender", productControllers.getFromGender);
+router.get("/:category", productControllers.getFromCategory);
+router.get("/:gender", productControllers.getFromGender);
 router.post("/",productControllers.postProduct);
 export default router;
