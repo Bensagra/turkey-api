@@ -15,7 +15,39 @@ res.json(result);
 };
 
 
-const postProduct= async(req,res)=>{
+const getFromCategory = async (req, res) => {
+    try {
+       const {product_subcategory_id} = req.body;
+        const connection = await getConnection();
+        
+        const query = "SELECT * FROM `Product`, `SubCategory`, `Category` WHERE Product.product_subcategory_id = "+ product_subcategory_id + "  and SubCategory.subcategory_id = Category.category_id";
+        const result = await connection.query(query, product_subcategory_id);
+        
+       
+        
+        res.json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+const getFromGender = async (req, res) => {
+    try {
+       const {product_gender_id} = req.body;
+        const connection = await getConnection();
+         const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = "+ product_gender_id;
+         const result = await connection.query(query, product_gender_id);
+        
+       
+        
+        res.json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+   const postProduct= async(req,res)=>{
     try {
        
      const {product_name,product_title, product_description,product_material_id, product_photo_url,product_price,product_subcategory_id, product_gender_id} = req.body;
@@ -35,7 +67,10 @@ const postProduct= async(req,res)=>{
     };
 
 
+
 export const methods = {
     getproduct,
-    postProduct
+    postProduct,
+    getFromCategory,
+    getFromGender,
 }
