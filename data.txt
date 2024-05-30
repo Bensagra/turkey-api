@@ -1,0 +1,32 @@
+
+
+Post: http://localhost:4000/api/turkey
+{
+		"product_name": "Darlin tostado",
+		"product_title": "",
+		"product_description": "Los cargos son los favoritos de la temporada. Los bolsillos patch se destacan y son el elemento principal que lo distingue de otros modelos de jean. Es recto, suelto y las costuras visibles en blanco le dan el toque.Si son fan de la tendencia oversize aprovechá a usarlo con un buzo o campera OS para darle una onda más street. ",
+		"product_material_id": 1,
+		"product_photo_url": "",
+		"product_price": 10000,
+		"product_subcategory_id": 3,
+		"product_gender_id": 1
+	}
+
+
+Get: http://localhost:4000/api/turkey
+
+
+Get: http://localhost:4000/api/turkey/:category
+
+{
+		"product_subcategory_id": 3
+	}
+
+
+
+
+Get: http://localhost:4000/api/turkey/:gender
+
+{
+		"product_subcategory_id": 2
+	}

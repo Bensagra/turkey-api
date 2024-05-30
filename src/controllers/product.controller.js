@@ -30,20 +30,7 @@ const getFromCategory = async (req, res) => {
 };
 
 
-const getFromGender = async (req, res) => {
-    try {
-       const {product_gender_id} = req.body;
-        const connection = await getConnection();
-         const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = "+ product_gender_id;
-         const result = await connection.query(query, product_gender_id);
-        
-       
-        
-        res.json(result);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-};
+
 
    const postProduct= async(req,res)=>{
     try {
@@ -64,6 +51,21 @@ const getFromGender = async (req, res) => {
     
     };
 
+
+    const getFromGender = async (req, res) => {
+        try {
+           const {product_gender_id} = req.body;
+            const connection = await getConnection();
+             const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = ";
+             const result = await connection.query(query, product_gender_id);
+            
+           
+            
+            res.json(result);
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    };
 
 
 export const methods = {
