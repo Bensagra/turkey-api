@@ -1,4 +1,4 @@
-import {Router, request, response} from "express";
+import {Router, req, res} from "express";
 import { methods as productControllers } from "../controllers/product.controller";
 
 
