@@ -84,7 +84,7 @@ const getFromCategory = async (req, res) => {
         const getCategory = async(req, res) => {
             console.log("hey")
             try {
-              const  {product_subcategory_id} = req.body;
+              const  {product_subcategory_id} = req.params;
                 const connection = await getConnection();
                 console.log(product_subcategory_id)
                 const query = "SELECT Category.* FROM Category JOIN SubCategory ON Category.category_id = SubCategory.category_id WHERE SubCategory.subcategory_id = " + product_subcategory_id;

@@ -12,5 +12,5 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //Routes
-app.use("/api/turkey",productRoutes);
+app.use("/api/turkey/",productRoutes);
 export default app; 
