@@ -56,7 +56,7 @@ const getFromCategory = async (req, res) => {
         try {
            const {product_gender_id} = req.body;
             const connection = await getConnection();
-             const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = ";
+             const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = " + product_gender_id;
              const result = await connection.query(query, product_gender_id);
             
            
@@ -84,7 +84,7 @@ const getFromCategory = async (req, res) => {
         const getCategory = async(req, res) => {
             console.log("hey")
             try {
-              const  {product_subcategory_id} = req.params;
+              const  {product_subcategory_id} = req.body;
                 const connection = await getConnection();
                 console.log(product_subcategory_id)
                 const query = "SELECT Category.* FROM Category JOIN SubCategory ON Category.category_id = SubCategory.category_id WHERE SubCategory.subcategory_id = " + product_subcategory_id;
