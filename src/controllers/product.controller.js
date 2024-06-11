@@ -98,6 +98,21 @@ const getFromCategory = async (req, res) => {
             }
         }
 
+        const getproductById= async(req,res)=>{
+            try {
+                const  {product_id} = req.body;
+                const connection = await getConnection();
+            const result = await connection.query("SELECT * FROM `Product` WHERE product_id =" + product_id);
+            res.json(result);
+            } catch (error) {
+                res.status(500).
+                res.send(error.message);
+                
+            }
+            
+            };
+
+
 export const methods = {
     getproduct,
     postProduct,
@@ -105,4 +120,5 @@ export const methods = {
     getFromGender,
     deleteProduct,
     getCategory,
+    getproductById,
 }
