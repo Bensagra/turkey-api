@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=@babel/preset-env",
-    "dev": "nodemon --exec npm run babel-node src/index.js"
+    "dev": "nodemon --exec npm run babel-node index.js"
   },
   "keywords": [],
   "author": "",
@@ -35,5 +35,6 @@
     "url": "https://github.com/Bensagra/turkey-api/issues"
   },
   "homepage": "https://github.com/Bensagra/turkey-api#readme",
-  "description": ""
+  "description": "",
+  "packageManager": "yarn@3.6.4"
 }
