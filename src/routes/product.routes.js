@@ -12,4 +12,5 @@ router.get("/category", productControllers.getFromCategory);
 router.get("/gender", productControllers.getFromGender);
 router.post("/",productControllers.postProduct);
 router.delete("/delete",productControllers.deleteProduct);
+router.get("/all_category", productControllers.getAllCategory);
 export default router;

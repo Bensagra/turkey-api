@@ -15,6 +15,22 @@ res.json(result);
 };
 
 
+const getAllCategory = async (req, res) => {
+    try {
+       
+  
+        const connection = await getConnection();
+        
+        const query = "SELECT * FROM `Category`";
+        const result = await connection.query(query);
+        res.json(result);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
 const getFromCategory = async (req, res) => {
     try {
        const {product_subcategory_id} = req.query;
@@ -122,4 +138,5 @@ export const methods = {
     deleteProduct,
     getCategory,
     getproductById,
+    getAllCategory,
 }
