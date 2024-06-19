@@ -129,6 +129,20 @@ const getFromCategory = async (req, res) => {
             
             };
 
+            const getAllSubCategory= async(req,res)=>{
+                try {
+                    const  {category_id} = req.query;
+                    const connection = await getConnection();
+                const result = await connection.query("SELECT * FROM `SubCategory` WHERE category_id =" + category_id);
+                res.json(result);
+                } catch (error) {
+                    res.status(500).
+                    res.send(error.message);
+                    
+                }
+                
+                };
+
 
 export const methods = {
     getproduct,
@@ -139,4 +153,5 @@ export const methods = {
     getCategory,
     getproductById,
     getAllCategory,
+    getAllSubCategory
 }
