@@ -148,15 +148,11 @@ const getFromCategory = async (req, res) => {
 
                 const postImage = async(req,res)=>{
                   console.log(req.file);
-                  const upload = multer({storage, req},);
-                  exports.upload = upload.single('image');
+                  res.send(req.file);
+                  //const upload = multer({storage, req},);
+                  //exports.upload = upload.single('image');
                 }
-    ftpClient.connect({
-        port: 21,
-        host: 'ftp.turkeyhombre.com.ar',
-        user: 'images@turkeyhombre.com.ar',
-        password: 'VirreyDelPino2706'
-    });
+   
 
 const storage = new ftpStorage({
         basepath: 'ftp://images%2540turkeyhombre.com.ar@ftp.turkeyhombre.com.ar/images',
