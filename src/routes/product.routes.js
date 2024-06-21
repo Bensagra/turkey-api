@@ -3,6 +3,8 @@ import { methods as productControllers } from "../controllers/product.controller
 
 
 const router = Router();
+const multer = require('multer');
+const path = multer({dest : 'uploads/'});
 
 
 router.get("/",productControllers.getproduct);
@@ -14,4 +16,5 @@ router.post("/",productControllers.postProduct);
 router.delete("/delete",productControllers.deleteProduct);
 router.get("/all_category", productControllers.getAllCategory);
 router.get("/all_subcategory", productControllers.getAllSubCategory);
+router.post("/image", path.single('image'), productControllers.postImage);
 export default router;

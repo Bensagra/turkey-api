@@ -1,6 +1,9 @@
 import { status } from "express/lib/response";
 import {getConnection} from "../database/database";
-
+const ftpStorage = require('multer-ftp');
+const ftp = require('ftp');
+const multer = require('multer');
+const ftpClient = new ftp();
 const getproduct= async(req,res)=>{
 try {
     const connection = await getConnection();
@@ -143,6 +146,30 @@ const getFromCategory = async (req, res) => {
                 
                 };
 
+                const postImage = async(req,res)=>{
+                  console.log(req.file);
+                  const upload = multer({storage, req},);
+                  exports.upload = upload.single('image');
+                }
+    ftpClient.connect({
+        port: 21,
+        host: 'ftp.turkeyhombre.com.ar',
+        user: 'images@turkeyhombre.com.ar',
+        password: 'VirreyDelPino2706'
+    });
+
+const storage = new ftpStorage({
+        basepath: 'ftp://images%2540turkeyhombre.com.ar@ftp.turkeyhombre.com.ar/images',
+        connection: ftpClient,
+        destination: (req, file, options, cb) => {
+            cb(null, './');
+        }
+    });
+
+
+
+
+
 
 export const methods = {
     getproduct,
@@ -153,5 +180,6 @@ export const methods = {
     getCategory,
     getproductById,
     getAllCategory,
-    getAllSubCategory
+    getAllSubCategory,
+    postImage
 }
