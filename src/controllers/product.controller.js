@@ -41,7 +41,7 @@ const getFromCategory = async (req, res) => {
     }
     const connection = await getConnection();
     const result = await connection.query("INSERT INTO Product SET ?",product);
-    res.json(result);
+    res.json(result).status(200);
       
     } catch (error) {
         res.status(500).
