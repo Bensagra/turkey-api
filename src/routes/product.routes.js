@@ -3,6 +3,8 @@ import { methods as productControllers } from "../controllers/product.controller
 
 
 const router = Router();
+//const multer = require('multer');
+//const upload = multer({dest : 'uploads/'});
 
 
 router.get("/",productControllers.getproduct);
@@ -12,4 +14,7 @@ router.get("/category", productControllers.getFromCategory);
 router.get("/gender", productControllers.getFromGender);
 router.post("/",productControllers.postProduct);
 router.delete("/delete",productControllers.deleteProduct);
+router.get("/all_category", productControllers.getAllCategory);
+router.get("/all_subcategory", productControllers.getAllSubCategory);
+//router.post("/image", upload.single('image'), productControllers.postImage);
 export default router;
