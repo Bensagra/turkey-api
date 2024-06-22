@@ -146,21 +146,21 @@ const getFromCategory = async (req, res) => {
                 
                 };
 
-                const postImage = async(req,res)=>{
-                  console.log(req.file);
-                  res.send(req.file);
+             //   const postImage = async(req,res)=>{
+              //    console.log(req.file);
+              //    res.send(req.file);
                   //const upload = multer({storage, req},);
                   //exports.upload = upload.single('image');
-                }
+              ///  }
    
 
-const storage = new ftpStorage({
-        basepath: 'ftp://images%2540turkeyhombre.com.ar@ftp.turkeyhombre.com.ar/images',
-        connection: ftpClient,
-        destination: (req, file, options, cb) => {
-            cb(null, './');
-        }
-    });
+//const storage = new ftpStorage({
+       // basepath: 'ftp://images%2540turkeyhombre.com.ar@ftp.turkeyhombre.com.ar/images',
+      //  connection: ftpClient,
+      //  destination: (req, file, options, cb) => {
+//cb(null, './');
+      //  }
+ //   });
 
 
 
@@ -177,5 +177,5 @@ export const methods = {
     getproductById,
     getAllCategory,
     getAllSubCategory,
-    postImage
+  //  postImage
 }
