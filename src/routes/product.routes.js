@@ -3,8 +3,8 @@ import { methods as productControllers } from "../controllers/product.controller
 
 
 const router = Router();
-const multer = require('multer');
-const upload = multer({dest : 'uploads/'});
+//const multer = require('multer');
+//const upload = multer({dest : 'uploads/'});
 
 
 router.get("/",productControllers.getproduct);

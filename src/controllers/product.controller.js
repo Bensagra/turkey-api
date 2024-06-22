@@ -1,9 +1,9 @@
 import { status } from "express/lib/response";
 import {getConnection} from "../database/database";
-const ftpStorage = require('multer-ftp');
-const ftp = require('ftp');
-const multer = require('multer');
-const ftpClient = new ftp();
+//const ftpStorage = require('multer-ftp');
+//const ftp = require('ftp');
+//const multer = require('multer');
+//const ftpClient = new ftp();
 const getproduct= async(req,res)=>{
 try {
     const connection = await getConnection();
