@@ -197,7 +197,23 @@ const getFromCategory = async (req, res) => {
                     }
                     
                     };
-    
+                    const getAllMaterial= async(req,res)=>{
+                   
+                        res.header("Access-Control-Allow-Origin", "*")
+                        try {
+                            
+                          
+                            const connection = await getConnection();
+                        const result = await connection.query("SELECT * FROM `Material`");
+                        res.json(result);
+                        } catch (error) {
+                            res.status(500).
+                            res.send(error.message);
+                            
+                        }
+                        
+                        };
+        
 
              //   const postImage = async(req,res)=>{
               //    console.log(req.file);
@@ -233,5 +249,6 @@ export const methods = {
     getAllSubCategory,
     getProductos,
     getMaterialName,
+    getAllMaterial,
   //  postImage
 }
