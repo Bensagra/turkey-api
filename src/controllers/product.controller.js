@@ -9,7 +9,7 @@ const getproduct= async(req,res)=>{
 try {
    
     const connection = await getConnection();
-const result = await connection.query("SELECT * FROM `Product`");
+const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0");
 res.json(result);
 } catch (error) {
     res.status(500).
@@ -42,7 +42,7 @@ const getFromCategory = async (req, res) => {
   
         const connection = await getConnection();
         
-        const query = "SELECT * FROM `Product`, `SubCategory`, `Category` WHERE Product.product_subcategory_id = "+ product_subcategory_id + "  and SubCategory.subcategory_id = Category.category_id";
+        const query = "SELECT * FROM `Product`, `SubCategory`, `Category` WHERE Product.product_subcategory_id = "+ product_subcategory_id + "  and SubCategory.subcategory_id = Category.category_id and Product.delete = 0";
         const result = await connection.query(query, product_subcategory_id);
         res.json(result);
 
@@ -78,7 +78,7 @@ const getFromCategory = async (req, res) => {
         try {
            const {product_gender_id} = req.query;
             const connection = await getConnection();
-             const query = "SELECT * FROM `Product` WHERE Product.product_gender_id = " + product_gender_id;
+             const query = "SELECT * FROM `Product` WHERE Product.delete = 0 and Product.product_gender_id = " + product_gender_id;
              const result = await connection.query(query, product_gender_id);
             
            
@@ -126,7 +126,7 @@ const getFromCategory = async (req, res) => {
             try {
                 const  {product_id} = req.query;
                 const connection = await getConnection();
-            const result = await connection.query("SELECT * FROM `Product` WHERE product_id =" + product_id);
+            const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0 and product_id =" + product_id);
             res.json(result);
             } catch (error) {
                 res.status(500).
@@ -188,7 +188,7 @@ const getFromCategory = async (req, res) => {
                         
                         const  {category_id} = req.query;
                         const connection = await getConnection();
-                    const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE s.category_id = " + category_id);
+                    const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE p.delete = 0 s.category_id = " + category_id);
                     res.json(result);
                     } catch (error) {
                         res.status(500).
