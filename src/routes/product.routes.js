@@ -18,5 +18,6 @@ router.get("/all_category", productControllers.getAllCategory);
 router.get("/all_subcategory", productControllers.getSubCategory);
 router.get("/subCategory", productControllers.getAllSubCategory);
 router.get("/get_productos", productControllers.getProductos);
+router.get("/get_material_name", productControllers.getMaterialName);
 //router.post("/image", upload.single('image'), productControllers.postImage);
 export default router;

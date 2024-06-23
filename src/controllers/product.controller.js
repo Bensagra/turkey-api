@@ -151,6 +151,21 @@ const getFromCategory = async (req, res) => {
                 };
 
 
+const getMaterialName= async(req,res)=>{
+                try {
+                    const  {product_material_id} = req.query;
+                    const connection = await getConnection();
+                const result = await connection.query("SELECT * FROM `Material` WHERE Material.material_id =" + product_material_id);
+                res.json(result);
+                } catch (error) {
+                    res.status(500).
+                    res.send(error.message);
+                    
+                }
+                
+                };
+
+
             const getSubCategory= async(req,res)=>{
                 try {
                     const  {category_id} = req.query;
@@ -216,5 +231,6 @@ export const methods = {
     getSubCategory,
     getAllSubCategory,
     getProductos,
+    getMaterialName,
   //  postImage
 }
