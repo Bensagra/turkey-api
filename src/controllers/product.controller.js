@@ -6,7 +6,7 @@ import {getConnection} from "../database/database";
 //const ftpClient = new ftp();
 const getproduct= async(req,res)=>{
 try {
-    res.setHeader('Access-Control-Allow-Origin', '*') 
+    res.header('Access-Control-Allow-Origin', '*') 
     const connection = await getConnection();
 const result = await connection.query("SELECT * FROM `Product`");
 res.json(result);
