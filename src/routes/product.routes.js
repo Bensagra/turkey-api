@@ -16,6 +16,6 @@ router.post("/",productControllers.postProduct);
 router.delete("/delete",productControllers.deleteProduct);
 router.get("/all_category", productControllers.getAllCategory);
 router.get("/all_subcategory", productControllers.getSubCategory);
-router.get("/subcategory", productControllers.getAllSubCategory);
+router.get("/subCategory", productControllers.getAllSubCategory);
 //router.post("/image", upload.single('image'), productControllers.postImage);
 export default router;
