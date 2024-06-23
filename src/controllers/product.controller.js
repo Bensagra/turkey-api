@@ -148,6 +148,7 @@ const getFromCategory = async (req, res) => {
                 
                 };
 
+
             const getSubCategory= async(req,res)=>{
                 try {
                     const  {category_id} = req.query;
@@ -161,6 +162,21 @@ const getFromCategory = async (req, res) => {
                 }
                 
                 };
+
+                const getProductos= async(req,res)=>{
+                    try {
+                      
+                        const connection = await getConnection();
+                    const result = await connection.query("SELECT * FROM `Products` WHERE category_id =" + category_id);
+                    res.json(result);
+                    } catch (error) {
+                        res.status(500).
+                        res.send(error.message);
+                        
+                    }
+                    
+                    };
+    
 
              //   const postImage = async(req,res)=>{
               //    console.log(req.file);
@@ -194,5 +210,6 @@ export const methods = {
     getAllCategory,
     getSubCategory,
     getAllSubCategory,
+    getProductos,
   //  postImage
 }
