@@ -188,7 +188,7 @@ const getFromCategory = async (req, res) => {
                         
                         const  {category_id} = req.query;
                         const connection = await getConnection();
-                    const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE p.delete = 0 s.category_id = " + category_id);
+                    const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE p.delete = 0 and s.category_id = " + category_id);
                     res.json(result);
                     } catch (error) {
                         res.status(500).
