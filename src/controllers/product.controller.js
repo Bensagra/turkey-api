@@ -101,6 +101,8 @@ const getFromCategory = async (req, res) => {
         
         };
 
+        
+
         const getCategory = async(req, res) => {
             console.log("hey")
             try {
@@ -133,6 +135,20 @@ const getFromCategory = async (req, res) => {
             };
 
             const getAllSubCategory= async(req,res)=>{
+                try {
+                
+                    const connection = await getConnection();
+                const result = await connection.query("SELECT * FROM `SubCategory`");
+                res.json(result).status(200);
+                } catch (error) {
+                    res.status(500).
+                    res.send(error.message);
+                    
+                }
+                
+                };
+
+            const getSubCategory= async(req,res)=>{
                 try {
                     const  {category_id} = req.query;
                     const connection = await getConnection();
@@ -176,6 +192,7 @@ export const methods = {
     getCategory,
     getproductById,
     getAllCategory,
+    getSubCategory,
     getAllSubCategory,
   //  postImage
 }
