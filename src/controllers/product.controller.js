@@ -151,8 +151,8 @@ const getFromCategory = async (req, res) => {
                 };
 
 
-const getMaterialName= async(req,res)=>{
-    res.header("Access-Control-Allow-Origin", "*")
+                const getMaterialName= async(req,res)=>{
+                    res.header("Access-Control-Allow-Origin", "*")
                 try {
                     const  {product_material_id} = req.query;
                     const connection = await getConnection();
