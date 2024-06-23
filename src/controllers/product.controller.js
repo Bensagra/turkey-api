@@ -6,6 +6,7 @@ import {getConnection} from "../database/database";
 //const ftpClient = new ftp();
 const getproduct= async(req,res)=>{
 try {
+    res.setHeader('Access-Control-Allow-Origin', '*') 
     const connection = await getConnection();
 const result = await connection.query("SELECT * FROM `Product`");
 res.json(result);
@@ -165,6 +166,7 @@ const getFromCategory = async (req, res) => {
 
                 const getProductos= async(req,res)=>{
                     try {
+                        
                         const  {category_id} = req.query;
                         const connection = await getConnection();
                     const result = await connection.query("SELECT * FROM `Product` WHERE category_id =" + category_id);
