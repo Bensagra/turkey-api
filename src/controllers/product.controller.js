@@ -167,7 +167,7 @@ const getFromCategory = async (req, res) => {
                     try {
                       
                         const connection = await getConnection();
-                    const result = await connection.query("SELECT * FROM `Products` WHERE category_id =" + category_id);
+                    const result = await connection.query("SELECT * FROM `Product` WHERE category_id =" + category_id);
                     res.json(result);
                     } catch (error) {
                         res.status(500).
