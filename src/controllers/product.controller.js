@@ -5,8 +5,9 @@ import {getConnection} from "../database/database";
 //const multer = require('multer');
 //const ftpClient = new ftp();
 const getproduct= async(req,res)=>{
-try {
     res.header('Access-Control-Allow-Origin', '*') 
+try {
+   
     const connection = await getConnection();
 const result = await connection.query("SELECT * FROM `Product`");
 res.json(result);
