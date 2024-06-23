@@ -166,6 +166,7 @@ const getFromCategory = async (req, res) => {
                 };
 
                 const getProductos= async(req,res)=>{
+                    req.header("Access-Control-Allow-Origin", "*")
                     try {
                         
                         const  {category_id} = req.query;
