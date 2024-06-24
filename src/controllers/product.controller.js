@@ -93,7 +93,7 @@ const getFromCategory = async (req, res) => {
         try {
             const {product_id} = req.query;
             const connection = await getConnection();
-        const result = await connection.query("DELETE FROM `Product` WHERE product_id = "+ product_id);
+        const result = await connection.query("UPDATE Product p SET p.delete = 1 WHERE p.product_id = "+ product_id);
         res.json(result).status(200);
         } catch (error) {
             res.status(500).
