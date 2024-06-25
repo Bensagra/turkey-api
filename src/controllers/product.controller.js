@@ -1,9 +1,6 @@
 import { status } from "express/lib/response";
 import {getConnection} from "../database/database";
-//const ftpStorage = require('multer-ftp');
-//const ftp = require('ftp');
-//const multer = require('multer');
-//const ftpClient = new ftp();
+
 const getproduct= async(req,res)=>{
     res.header("Access-Control-Allow-Origin", "*");
 try {
@@ -197,6 +194,9 @@ const getFromCategory = async (req, res) => {
                     }
                     
                     };
+
+                    
+
                     const getAllMaterial= async(req,res)=>{
                    
                         res.header("Access-Control-Allow-Origin", "*")
@@ -214,6 +214,23 @@ const getFromCategory = async (req, res) => {
                         
                         };
         
+
+                        const uploadImage= async(req,res)=>{
+                   
+                            res.header("Access-Control-Allow-Origin", "*")
+                            try {
+                                
+                              
+                                const connection = await getConnection();
+                            const result = await connection.query("SELECT * FROM `Material`");
+                            res.json(result);
+                            } catch (error) {
+                                res.status(500).
+                                res.send(error.message);
+                                
+                            }
+                            
+                            };
 
              //   const postImage = async(req,res)=>{
               //    console.log(req.file);
@@ -250,5 +267,6 @@ export const methods = {
     getProductos,
     getMaterialName,
     getAllMaterial,
+    uploadImage,
   //  postImage
 }
