@@ -22,7 +22,7 @@ router.get("/product_subcategory_id/", productControllers.getCategory);
 router.get("/category", productControllers.getFromCategory);
 router.get("/gender", productControllers.getFromGender);
 router.post("/",productControllers.postProduct);
-router.delete("/delete",productControllers.deleteProduct);
+router.put("/delete",productControllers.deleteProduct);
 router.get("/all_category", productControllers.getAllCategory);
 router.get("/all_subcategory", productControllers.getSubCategory);
 router.get("/subCategory", productControllers.getAllSubCategory);
@@ -30,4 +30,5 @@ router.get("/get_productos", productControllers.getProductos);
 router.get("/get_material_name", productControllers.getMaterialName);
 router.get("/get_material", productControllers.getAllMaterial);
 router.post("/post_image",multerUpload, productControllers.uploadImage)
+router.put("/", productControllers.updateProduct);
 export default router;
