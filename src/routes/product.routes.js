@@ -3,7 +3,8 @@ import { methods as productControllers } from "../controllers/product.controller
 import multer from "multer";
 import {dirname, join} from "path"
 import { fileURLToPath } from "url";
-const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
+
+const _CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
 const multerUpload = multer({
     dest: join(CURRENT_DIR,"../uploads"),
     limits:{
@@ -29,6 +30,6 @@ router.get("/subCategory", productControllers.getAllSubCategory);
 router.get("/get_productos", productControllers.getProductos);
 router.get("/get_material_name", productControllers.getMaterialName);
 router.get("/get_material", productControllers.getAllMaterial);
-router.post("/post_image",multerUpload, productControllers.uploadImage)
+router.post("/post_image",multerUpload.single("image"), productControllers.uploadImage)
 router.put("/", productControllers.updateProduct);
 export default router;
