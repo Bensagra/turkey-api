@@ -1,22 +1,36 @@
 import {Router} from "express";
 import { methods as productControllers } from "../controllers/product.controller.js";
 import multer from "multer";
-import {dirname, join} from "path"
+import {dirname, extname, join} from "path"
 import { fileURLToPath } from "url";
-
+import express from "express";
 const router = Router();
+
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
+const MIMETYPES = ["image/png", "image/jpg", "image/jpeg"];
 
 const multerUpload = multer({
+    fileFilter(req, file, cb){
+        if (MIMETYPES.includes(file.mimetype)) {
+            cb(null, true);
+            
+        }else{
+            cb(new Error("Invalid file type"));
+    }},
     storage: multer.diskStorage({
         destination: join(CURRENT_DIR, '../uploads'),
+        filename: (req, file, cb) => {
+            const fileExtension = extname(file.originalname);
+        const fileName = file.originalname.split(".")[0];
+        cb(null, `${fileName}-${Date.now()}${fileExtension}`);
+        }
         
     }),
     limits: {
         fieldSize: 10000000,
     },
 });
-
+router.use("/uploads", express.static(join(CURRENT_DIR, '../uploads')));
 router.get("/",productControllers.getproduct);
 router.get("/get_product_by_id", productControllers.getproductById);
 router.get("/product_subcategory_id/", productControllers.getCategory);
