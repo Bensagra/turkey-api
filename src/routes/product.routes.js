@@ -17,7 +17,7 @@ const multerUpload = multer({
         }else{
             cb(new Error("Invalid file type"));
     }},
-    storage: multer.diskStorage({
+    storage: multer.memoryStorage({
         destination: join(CURRENT_DIR, '../uploads'),
         filename: (req, file, cb) => {
             const fileExtension = extname(file.originalname);
