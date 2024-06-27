@@ -22,7 +22,7 @@ const multerUpload = multer({
         filename: (req, file, cb) => {
             const fileExtension = extname(file.originalname);
         const fileName = file.originalname.split(".")[0];
-        cb(null, `${req.params.id}${fileExtension}`);
+        cb(null, `${req.params}}${fileExtension}`);
         }
         
     }),
