@@ -1,5 +1,5 @@
-import { status } from "express/lib/response";
-import {getConnection} from "../database/database";
+
+import {getConnection} from "../database/database.js";
 
 const getproduct= async(req,res)=>{
     res.header("Access-Control-Allow-Origin", "*");
