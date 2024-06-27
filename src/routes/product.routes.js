@@ -4,9 +4,7 @@ import multer from "multer";
 import {dirname, extname, join} from "path"
 import { fileURLToPath } from "url";
 import express from "express";
-import cors  from "cors";
 const router = Router();
-
 
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
 const MIMETYPES = ["image/png", "image/jpg", "image/jpeg"];
@@ -33,7 +31,6 @@ const multerUpload = multer({
     },
 });
 
-router.use(cors());
 router.use("/uploads", express.static(join(CURRENT_DIR, '../uploads')));
 router.get("/",productControllers.getproduct);
 router.get("/get_product_by_id", productControllers.getproductById);
