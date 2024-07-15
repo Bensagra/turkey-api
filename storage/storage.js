@@ -12,6 +12,6 @@ cloudinary.config({
  let image = "../src/uploads/WhatsApp Image 2024-06-29 at 22.35.49_3a650b7e.jpg";
 cloudinary.uploader.upload(image).then((result) => {
     console.log(result);
-    res.send(result);
+    res.send(result); 
 });
 
