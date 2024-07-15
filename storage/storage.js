@@ -1,25 +1,17 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-console.log(process.env.CLOUD_NAME)
+
+import config from "../src/config.js";
+
+
 cloudinary.config({
-    cloud_name:process.env.CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret:process.env.CLOUDINARY_SECRET
+    cloud_name:config.CLOUD_NAME,
+    api_key: config.CLOUDINARY_KEY,
+    api_secret:config.CLOUDINARY_SECRET
 });
 
- 
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-      folder: 'images_turkey',
-      format: async (req, file) => ['jpeg', 'png', 'jpg'], // supports promises as well
-      public_id: (req, file) => 'image',
-    },
-  });
-   
-
-module.exports = {
-    storage
-};
-
+ let image = "../src/uploads/WhatsApp Image 2024-06-29 at 22.35.49_3a650b7e.jpg";
+cloudinary.uploader.upload(image).then((result) => {
+    console.log(result);
+    res.send(result);
+});
 
