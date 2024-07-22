@@ -18,4 +18,5 @@ router.get("/get_productos", productControllers.getProductos);
 router.get("/get_material_name", productControllers.getMaterialName);
 router.get("/get_material", productControllers.getAllMaterial);
 router.put("/", productControllers.updateProduct);
+router.get("/get_product_by_subcategory", productControllers.getBySubcategory);
 export default router;
