@@ -285,6 +285,18 @@ const getFromCategory = async (req, res) => {
                             
                             };
 
+                            const getBySubcategory = async (req, res) => {
+                                try {
+                                    const {subcategory_id} = req.query;
+                                    const connection = await getConnection();
+                                    const query = "SELECT * FROM Product WHERE product_subcategory_id = ?";
+                                    const result = await connection.query(query, [subcategory_id]);
+                                    res.json(result);
+                                } catch (error) {
+                                    res.status(500).send(error.message);
+                                }
+                            };
+
              //   const postImage = async(req,res)=>{
               //    console.log(req.file);
               //    res.send(req.file);
@@ -309,6 +321,7 @@ const getFromCategory = async (req, res) => {
 export const methods = {
     getproduct,
     postProduct,
+    getBySubcategory,
     getFromCategory,
     getFromGender,
     deleteProduct,
