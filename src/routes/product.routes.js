@@ -5,7 +5,6 @@ const  {storage}  = require('../../storage/storage.js');
 const multer = require('multer');
 const parser = multer(storage);
 
-import express from "express";
 
 const router = Router();
 
