@@ -75,7 +75,7 @@ const getFromCategory = async (req, res) => {
         try {
            const {product_gender_id} = req.query;
             const connection = await getConnection();
-             const query = "SELECT * FROM `Product` WHERE Product.delete = 0 and Product.gender_id = " + product_gender_id;
+             const query = "SELECT * FROM `Product` WHERE Product.delete = 0 and Product.product_gender_id = " + product_gender_id;
              const result = await connection.query(query, product_gender_id);
             
            
