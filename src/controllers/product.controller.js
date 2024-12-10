@@ -4,7 +4,7 @@ const getproduct = async (req, res) => {
   try {
     const connection = await getConnection();
     const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0");
-    connection.release(); // Libera la conexión al pool
+    connection.release();
     return res.json(result);
   } catch (error) {
     res.status(500).send(error.message);
@@ -50,7 +50,7 @@ const postProduct = async (req, res) => {
       product_price,
       product_subcategory_id,
       product_gender_id,
-    } = req.body; // Usar req.body en lugar de req.query para POST
+    } = req.body;
     const product = {
       product_name,
       product_title,
@@ -94,7 +94,7 @@ const updateProduct = async (req, res) => {
       product_price,
       product_subcategory_id,
       product_gender_id,
-    } = req.body; // Usar req.body para datos de actualización
+    } = req.body;
 
     if (!product_id) {
       return res.status(400).json({ message: "Product ID is required" });
@@ -118,7 +118,7 @@ const updateProduct = async (req, res) => {
       queryParams.push(value);
     }
 
-    updateQuery = updateQuery.slice(0, -2); // Eliminar la última coma
+    updateQuery = updateQuery.slice(0, -2);
     updateQuery += " WHERE product_id = ?";
     queryParams.push(product_id);
 
@@ -131,10 +131,127 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// Otros métodos adaptados seguirían la misma estructura:
-// - Usar `req.body` para métodos POST/PUT si corresponde.
-// - Usar parámetros en las consultas para evitar inyecciones SQL.
-// - Liberar la conexión con `connection.release()` al finalizar cada operación.
+const getCategory = async (req, res) => {
+  try {
+    const { product_subcategory_id } = req.query;
+    const connection = await getConnection();
+    const query = `
+      SELECT Category.* 
+      FROM Category 
+      JOIN SubCategory ON Category.category_id = SubCategory.category_id 
+      WHERE SubCategory.subcategory_id = ?`;
+    const result = await connection.query(query, [product_subcategory_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getproductById = async (req, res) => {
+  try {
+    const { product_id } = req.query;
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM Product WHERE Product.delete = 0 AND product_id = ?", [product_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getAllSubCategory = async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM SubCategory");
+    connection.release();
+    return res.status(200).json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getMaterialName = async (req, res) => {
+  try {
+    const { product_material_id } = req.query;
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM Material WHERE material_id = ?", [product_material_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getSubCategory = async (req, res) => {
+  try {
+    const { category_id } = req.query;
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM SubCategory WHERE category_id = ?", [category_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getProductos = async (req, res) => {
+  try {
+    const { category_id } = req.query;
+    const connection = await getConnection();
+    const query = `
+      SELECT p.* 
+      FROM Product AS p 
+      JOIN SubCategory AS s ON p.product_subcategory_id = s.subcategory_id 
+      WHERE p.delete = 0 AND s.category_id = ?`;
+    const result = await connection.query(query, [category_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getAllMaterial = async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM Material");
+    connection.release();
+    return res.status(200).json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const getBySubcategory = async (req, res) => {
+  try {
+    const { subcategory_id } = req.query;
+    const connection = await getConnection();
+    const query = "SELECT * FROM Product WHERE product_subcategory_id = ?";
+    const result = await connection.query(query, [subcategory_id]);
+    connection.release();
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+const getFromGender = async (req, res) => {
+    try {
+        const { product_gender_id } = req.query;
+
+        if (!product_gender_id) {
+            return res.status(400).json({ message: "Product gender ID is required" });
+        }
+
+        const connection = await getConnection();
+        const query = "SELECT * FROM `Product` WHERE Product.delete = 0 AND Product.product_gender_id = ?";
+        const result = await connection.query(query, [product_gender_id]);
+
+        return res.json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
 
 export const methods = {
   getproduct,
@@ -142,5 +259,14 @@ export const methods = {
   getFromCategory,
   deleteProduct,
   updateProduct,
-  // Agrega los demás métodos aquí
+  getCategory,
+  getproductById,
+  getAllCategory,
+  getSubCategory,
+  getAllSubCategory,
+  getProductos,
+  getMaterialName,
+  getAllMaterial,
+  getBySubcategory,
+  getFromGender,
 };
