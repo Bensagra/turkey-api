@@ -50,7 +50,7 @@ const postProduct = async (req, res) => {
       product_price,
       product_subcategory_id,
       product_gender_id,
-    } = req.body;
+    } = req.query;
     const product = {
       product_name,
       product_title,
