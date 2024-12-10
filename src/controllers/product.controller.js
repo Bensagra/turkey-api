@@ -2,7 +2,7 @@
 import {getConnection} from "../database/database.js";
 
 const getproduct= async(req,res)=>{
-    res.header("Access-Control-Allow-Origin", "*");
+    
 try {
    
     const connection = await getConnection();
