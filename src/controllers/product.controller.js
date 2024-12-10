@@ -35,7 +35,7 @@ const getAllCategory = async (req, res) => {
 
 const getFromCategory = async (req, res) => {
     try {
-       const {product_subcategory_id} = req.query;
+       const {product_subcategory_id} = req.body;
   
         const connection = await getConnection();
         
@@ -54,7 +54,7 @@ const getFromCategory = async (req, res) => {
    const postProduct= async(req,res)=>{
     try {
        
-     const {product_name,product_title, product_description,product_material_id, product_photo_url,product_price,product_subcategory_id, product_gender_id} = req.query;
+     const {product_name,product_title, product_description,product_material_id, product_photo_url,product_price,product_subcategory_id, product_gender_id} = req.body;
      const product ={
         product_name,product_title, product_description,product_material_id, product_photo_url,product_price,product_subcategory_id, product_gender_id
     }
@@ -73,7 +73,7 @@ const getFromCategory = async (req, res) => {
 
     const getFromGender = async (req, res) => {
         try {
-           const {product_gender_id} = req.query;
+           const {product_gender_id} = req.body;
             const connection = await getConnection();
              const query = "SELECT * FROM `Product` WHERE Product.delete = 0 and Product.product_gender_id = " + product_gender_id;
              const result = await connection.query(query, product_gender_id);
@@ -88,7 +88,7 @@ const getFromCategory = async (req, res) => {
 
     const deleteProduct= async(req,res)=>{
         try {
-            const {product_id} = req.query;
+            const {product_id} = req.body
             const connection = await getConnection();
         const result = await connection.query("UPDATE Product p SET p.delete = 1 WHERE p.product_id = "+ product_id);
         res.json(result).status(200);
@@ -113,7 +113,7 @@ const getFromCategory = async (req, res) => {
                     product_price,
                     product_subcategory_id,
                     product_gender_id
-                } = req.query;
+                } = req.body
         
                 if (!product_id) {
                     return res.status(400).json({ message: "Product ID is required" });
@@ -158,7 +158,7 @@ const getFromCategory = async (req, res) => {
         const getCategory = async(req, res) => {
             console.log("hey")
             try {
-              const  {product_subcategory_id} = req.query;
+              const  {product_subcategory_id} = req.body
                 const connection = await getConnection();
                 console.log(product_subcategory_id)
                 const query = "SELECT Category.* FROM Category JOIN SubCategory ON Category.category_id = SubCategory.category_id WHERE SubCategory.subcategory_id = " + product_subcategory_id;
@@ -174,7 +174,7 @@ const getFromCategory = async (req, res) => {
 
         const getproductById= async(req,res)=>{
             try {
-                const  {product_id} = req.query;
+                const  {product_id} = req.body;
                 const connection = await getConnection();
             const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0 and product_id =" + product_id);
             res.json(result);
@@ -204,7 +204,7 @@ const getFromCategory = async (req, res) => {
                 const getMaterialName= async(req,res)=>{
                     res.header("Access-Control-Allow-Origin", "*")
                 try {
-                    const  {product_material_id} = req.query;
+                    const  {product_material_id} = req.body;
                     const connection = await getConnection();
                 const result = await connection.query("SELECT * FROM `Material` WHERE Material.material_id =" + product_material_id);
                 res.json(result);
@@ -219,7 +219,7 @@ const getFromCategory = async (req, res) => {
 
             const getSubCategory= async(req,res)=>{
                 try {
-                    const  {category_id} = req.query;
+                    const  {category_id} = req.body;
                     const connection = await getConnection();
                 const result = await connection.query("SELECT * FROM `SubCategory` WHERE category_id =" + category_id);
                 res.json(result);
@@ -236,7 +236,7 @@ const getFromCategory = async (req, res) => {
                     res.header("Access-Control-Allow-Origin", "*")
                     try {
                         
-                        const  {category_id} = req.query;
+                        const  {category_id} = req.body;
                         const connection = await getConnection();
                     const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE p.delete = 0 and s.category_id = " + category_id);
                     res.json(result);
@@ -287,7 +287,7 @@ const getFromCategory = async (req, res) => {
 
                             const getBySubcategory = async (req, res) => {
                                 try {
-                                    const {subcategory_id} = req.query;
+                                    const {subcategory_id} = req.body;
                                     const connection = await getConnection();
                                     const query = "SELECT * FROM Product WHERE product_subcategory_id = ?";
                                     const result = await connection.query(query, [subcategory_id]);
@@ -298,8 +298,8 @@ const getFromCategory = async (req, res) => {
                             };
 
              //   const postImage = async(req,res)=>{
-              //    console.log(req.file);
-              //    res.send(req.file);
+              //    console.log(req.body;
+              //    res.send(req.body;
                   //const upload = multer({storage, req},);
                   //exports.upload = upload.single('image');
               ///  }
