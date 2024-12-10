@@ -7,10 +7,10 @@ try {
    
     const connection = await getConnection();
 const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0");
-res.json(result);
+return res.json(result);
 } catch (error) {
-    res.status(500).
-    res.send(error.message);
+     res.status(500).
+     res.send(error.message);
     
 }
 
@@ -25,10 +25,10 @@ const getAllCategory = async (req, res) => {
         
         const query = "SELECT * FROM `Category`";
         const result = await connection.query(query);
-        res.json(result);
+        return res.json(result);
 
     } catch (error) {
-        res.status(500).send(error.message);
+         res.status(500).send(error.message);
     }
 };
 
@@ -41,10 +41,10 @@ const getFromCategory = async (req, res) => {
         
         const query = "SELECT * FROM `Product`, `SubCategory`, `Category` WHERE Product.product_subcategory_id = "+ product_subcategory_id + "  and SubCategory.subcategory_id = Category.category_id and Product.delete = 0";
         const result = await connection.query(query, product_subcategory_id);
-        res.json(result);
+        return res.json(result);
 
     } catch (error) {
-        res.status(500).send(error.message);
+         res.status(500).send(error.message);
     }
 };
 
@@ -60,11 +60,11 @@ const getFromCategory = async (req, res) => {
     }
     const connection = await getConnection();
     const result = await connection.query("INSERT INTO Product SET ?",product);
-    res.json(result).status(200);
+    return res.json(result).status(200);
       
     } catch (error) {
-        res.status(500).
-        res.send(error.message);
+         res.status(500).
+         res.send(error.message);
         
     }
     
@@ -80,9 +80,9 @@ const getFromCategory = async (req, res) => {
             
            
             
-            res.json(result);
+            return res.json(result);
         } catch (error) {
-            res.status(500).send(error.message);
+             res.status(500).send(error.message);
         }
     };
 
@@ -91,10 +91,10 @@ const getFromCategory = async (req, res) => {
             const {product_id} = req.query;
             const connection = await getConnection();
         const result = await connection.query("UPDATE Product p SET p.delete = 1 WHERE p.product_id = "+ product_id);
-        res.json(result).status(200);
+        return res.json(result).status(200);
         } catch (error) {
-            res.status(500).
-            res.send(error.message);
+             res.status(500).
+             res.send(error.message);
             
         }
         
@@ -116,7 +116,7 @@ const getFromCategory = async (req, res) => {
                 } = req.query;
         
                 if (!product_id) {
-                    return res.status(400).json({ message: "Product ID is required" });
+                    return  res.status(400).json({ message: "Product ID is required" });
                 }
         
                 const fieldsToUpdate = {};
@@ -147,9 +147,9 @@ const getFromCategory = async (req, res) => {
                 const connection = await getConnection();
                 const result = await connection.query(updateQuery, queryParams);
         
-                res.json(result).status(200);
+                return res.json(result).status(200);
             } catch (error) {
-                res.status(500).send(error.message);
+                 res.status(500).send(error.message);
             }
         };
 
@@ -166,9 +166,9 @@ const getFromCategory = async (req, res) => {
                
               
                
-               res.json(result);
+               return res.json(result);
             } catch (error) {
-                res.status(500).send(error.message);
+                 res.status(500).send(error.message);
             }
         }
 
@@ -177,10 +177,10 @@ const getFromCategory = async (req, res) => {
                 const  {product_id} = req.query;
                 const connection = await getConnection();
             const result = await connection.query("SELECT * FROM `Product` WHERE Product.delete = 0 and product_id =" + product_id);
-            res.json(result);
+            return res.json(result);
             } catch (error) {
-                res.status(500).
-                res.send(error.message);
+                 res.status(500).
+                 res.send(error.message);
                 
             }
             
@@ -191,10 +191,10 @@ const getFromCategory = async (req, res) => {
                 
                     const connection = await getConnection();
                 const result = await connection.query("SELECT * FROM `SubCategory`");
-                res.json(result).status(200);
+                return res.json(result).status(200);
                 } catch (error) {
-                    res.status(500).
-                    res.send(error.message);
+                     res.status(500).
+                     res.send(error.message);
                     
                 }
                 
@@ -202,15 +202,15 @@ const getFromCategory = async (req, res) => {
 
 
                 const getMaterialName= async(req,res)=>{
-                    res.header("Access-Control-Allow-Origin", "*")
+                     res.header("Access-Control-Allow-Origin", "*")
                 try {
                     const  {product_material_id} = req.query;
                     const connection = await getConnection();
                 const result = await connection.query("SELECT * FROM `Material` WHERE Material.material_id =" + product_material_id);
-                res.json(result);
+                return res.json(result);
                 } catch (error) {
-                    res.status(500).
-                    res.send(error.message);
+                     res.status(500).
+                     res.send(error.message);
                     
                 }
                 
@@ -222,10 +222,10 @@ const getFromCategory = async (req, res) => {
                     const  {category_id} = req.query;
                     const connection = await getConnection();
                 const result = await connection.query("SELECT * FROM `SubCategory` WHERE category_id =" + category_id);
-                res.json(result);
+                return res.json(result);
                 } catch (error) {
-                    res.status(500).
-                    res.send(error.message);
+                     res.status(500).
+                     res.send(error.message);
                     
                 }
                 
@@ -233,16 +233,16 @@ const getFromCategory = async (req, res) => {
 
                 const getProductos= async(req,res)=>{
                    
-                    res.header("Access-Control-Allow-Origin", "*")
+                     res.header("Access-Control-Allow-Origin", "*")
                     try {
                         
                         const  {category_id} = req.query;
                         const connection = await getConnection();
                     const result = await connection.query("SELECT p.* FROM `Product` as p JOIN `SubCategory` as s ON p.product_subcategory_id = s.subcategory_id WHERE p.delete = 0 and s.category_id = " + category_id);
-                    res.json(result);
+                    return res.json(result);
                     } catch (error) {
-                        res.status(500).
-                        res.send(error.message);
+                         res.status(500).
+                         res.send(error.message);
                         
                     }
                     
@@ -252,16 +252,16 @@ const getFromCategory = async (req, res) => {
 
                     const getAllMaterial= async(req,res)=>{
                    
-                        res.header("Access-Control-Allow-Origin", "*")
+                         res.header("Access-Control-Allow-Origin", "*")
                         try {
                             
                           
                             const connection = await getConnection();
                         const result = await connection.query("SELECT * FROM `Material`");
-                        res.json(result);
+                        return res.json(result);
                         } catch (error) {
-                            res.status(500).
-                            res.send(error.message);
+                             res.status(500).
+                             res.send(error.message);
                             
                         }
                         
@@ -270,16 +270,16 @@ const getFromCategory = async (req, res) => {
 
                         const uploadImage= async(req,res)=>{
                    
-                            res.header("Access-Control-Allow-Origin", "*")
+                             res.header("Access-Control-Allow-Origin", "*")
                             try {
                                 
                               
                                 const connection = await getConnection();
                             const result = await connection.query("SELECT * FROM `Material`");
-                            res.json(result);
+                            return res.json(result);
                             } catch (error) {
-                                res.status(500).
-                                res.send(error.message);
+                                 res.status(500).
+                                 res.send(error.message);
                                 
                             }
                             
@@ -291,15 +291,15 @@ const getFromCategory = async (req, res) => {
                                     const connection = await getConnection();
                                     const query = "SELECT * FROM Product WHERE product_subcategory_id = ?";
                                     const result = await connection.query(query, [subcategory_id]);
-                                    res.json(result);
+                                    return res.json(result);
                                 } catch (error) {
-                                    res.status(500).send(error.message);
+                                     res.status(500).send(error.message);
                                 }
                             };
 
              //   const postImage = async(req,res)=>{
               //    console.log(req.file);
-              //    res.send(req.file);
+              //     res.send(req.file);
                   //const upload = multer({storage, req},);
                   //exports.upload = upload.single('image');
               ///  }
