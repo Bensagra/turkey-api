@@ -200,10 +200,14 @@ const getProductos = async (req, res) => {
     const { category_id } = req.query;
     const connection = await getConnection();
     const query = `
-      SELECT p.* 
-      FROM Product AS p 
-      JOIN SubCategory AS s ON p.product_subcategory_id = s.subcategory_id 
-      WHERE p.delete = 0 AND s.category_id = ?`;
+      SELECT p.*
+FROM Product AS p
+JOIN SubCategory AS s ON p.product_subcategory_id = s.subcategory_id
+WHERE p.delete = 0 AND s.category_id = (
+    SELECT s2.category_id
+    FROM SubCategory AS s2
+    WHERE s2.subcategory_id = ?
+`;
     const result = await connection.query(query, [category_id]);
     connection.release();
     return res.json(result);
