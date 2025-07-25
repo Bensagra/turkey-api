@@ -26,6 +26,7 @@ const getFromCategory = async (req, res) => {
   try {
     const { product_subcategory_id } = req.query;
     const connection = await getConnection();
+    
     const query = `
       SELECT * FROM Product 
       JOIN SubCategory ON Product.product_subcategory_id = SubCategory.subcategory_id 
