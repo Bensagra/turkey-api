@@ -39,6 +39,7 @@ const getFromCategory = async (req, res) => {
   }
 };
 
+
 const postProduct = async (req, res) => {
   try {
     const {
